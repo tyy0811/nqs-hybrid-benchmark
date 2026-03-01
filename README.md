@@ -17,26 +17,32 @@ nqs-hybrid-portfolio/
 │
 ├── 01_triangle_comparison/
 │   └── triangle_heisenberg.py        # VQC (equivariant + non-equivariant) vs NQS (RBM)
-│                                      # vs ED on 1D Heisenberg — the "signature figure"
+│                                      # vs DMRG on 1D Heisenberg — the "signature figure"
 │
 ├── 02_tfim_ground_state/
-│   └── tfim_2d_ground_state.py       # 2D TFIM ground state: RBM vs ARNN (autoregressive)
+│   └── tfim_2d_ground_state.py       # 2D TFIM on 4×4 and 6×6 lattices, comparing RBM, DMRG, and   
+                                        #autoregressive neural ansätze (ARNN/TransformerAR)
 │
 ├── 03_dynamics/
-│   └── quench_dynamics.py            # TDVP/tVMC time evolution after quantum quench
+│   └── quench_dynamics.py            # quench-dynamics benchmarks for an N=8 spin system under a field quench 
+                                        #h: 0.5 → 2.0, comparing NQS TDVP against exact diagonalization
 │
 ├── 04_tnqs_interval/
-│   └── tnqs_interval.py              # t-NQS interval training (Van de Walle et al. 2024)
+│   └── tnqs_interval.py              # t-NQS causal interval training benchmarks for the 1D TFIM (N=8) under a 
+                                        #quench h: 0.5 → 2.0
 │
 ├── 05_hybrid_snapshots/
-│   └── hybrid_snapshot_pretraining.py  # Synthetic snapshot pretraining + VMC refinement (§6)
+│   └── hybrid_snapshot_pretraining.py  # hybrid snapshot pretraining benchmarks for the 1D TFIM (N=12, h=1.0). Comparing
+                                            #pretrained + VMC refinement against cold-start VMC, showing snapshot 
+                                            #pretraining behavior, multi-seed generalization, per-seed final error
+                                            #and convergence speed, mean VMC convergence,and final energy relative 
+                                            #to exact diagonalization. (§6)
+ 
 │
 ├── 06_bose_hubbard/
-│   └── bose_hubbard_ground_state.py   # BH ground state: n_max convergence + U/t sweep + 2D
-│
-├── baselines/
-│   └── dmrg_tebd_baselines.py        # DMRG ground states + TEBD quench dynamics (TeNPy)
-│
+│   └── bose_hubbard_ground_state.py   # Bose–Hubbard ground-state benchmarks with NQS (VMC): 
+                                        #n_max convergence + U/t sweep + 2D
+
 └── figures/
 ```
 
