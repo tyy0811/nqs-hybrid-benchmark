@@ -1,0 +1,68 @@
+Log file: /Users/zenith/Desktop/Neural_Quantum_State/00_validate_small_result.txt
+
+=== CHECK 1: 2-site TFIM (PBC) analytical vs numpy ===
+  Analytical: [-2.828427 -2.        2.        2.828427]
+  Numpy:      [-2.828427 -2.        2.        2.828427]
+  PASSED
+
+=== TFIM reference energies (h=1, J=1, PBC) ===
+     N              E0          E0/N
+     2     -2.82842712   -1.41421356
+     3     -4.00000000   -1.33333333
+     4     -5.22625186   -1.30656296
+     5     -6.47213595   -1.29442719
+     6     -7.72740661   -1.28790110
+     8    -10.25166179   -1.28145772
+    10    -12.78490644   -1.27849064
+  Thermo limit: E0/N -> -4/pi = -1.27323954
+
+=== Heisenberg reference energies (J=1, PBC) ===
+     N              E0          E0/N
+     4     -8.00000000   -2.00000000
+     6    -11.21110255   -1.86851709
+     8    -14.60437364   -1.82554670
+    10    -18.06178542   -1.80617854
+
+=== Cross-check: numpy ED vs NetKet ===
+  NetKet version: 3.19.2
+
+  --- TFIM sign convention: odd-N eigenvalue test ---
+  (Odd rings break bipartite degeneracy → definitive sign test)
+    N=3 J_nk=+1: numpy=-4.00000000  netket=-3.46410162  [no match]
+    N=3 J_nk=-1: numpy=-4.00000000  netket=-4.00000000  [MATCH]
+    N=5 J_nk=+1: numpy=-6.47213595  netket=-6.15536707  [no match]
+    N=5 J_nk=-1: numpy=-6.47213595  netket=-6.47213595  [MATCH]
+    => Confirmed: use J=-1 in NetKet to match our convention
+
+  --- Sparse matrix Frobenius norm (N=4) ---
+    J_nk=+1: ||H_nk - H_np||_F = 1.60e+01  [DIFFER]
+    J_nk=-1: ||H_nk - H_np||_F = 0.00e+00  [MATCH]
+
+  --- TFIM eigenvalue check (J_netket=-1) ---
+    N= 4: numpy=-5.22625186  netket=-5.22625186  [OK]
+    N= 6: numpy=-7.72740661  netket=-7.72740661  [OK]
+    N= 8: numpy=-10.25166179  netket=-10.25166179  [OK]
+    N=10: numpy=-12.78490644  netket=-12.78490644  [OK]
+
+  --- Heisenberg eigenvalue check ---
+    N= 4: numpy=-8.00000000  netket=-8.00000000  [OK]
+    N= 6: numpy=-11.21110255  netket=-11.21110255  [OK]
+    N= 8: numpy=-14.60437364  netket=-14.60437364  [OK]
+    N=10: numpy=-18.06178542  netket=-18.06178542  [OK]
+
+  Sanity: our N=8 TFIM E0=-10.2517
+  NetKet docs cite E0=-10.2517 for 8-site Ising → consistent
+
+  --- Note for 2D TFIM (relevant to later notebooks) ---
+  Even×even square lattices (e.g. 4×4) are also bipartite,
+  so the same eigenvalue blindness applies in 2D.
+  For a non-bipartite 2D check, use 3×3 (9 sites, 2^9=512).
+
+YOUR KEY TARGETS:
+  TFIM  N=10: E0 = -12.78490644
+  Heis  N=10: E0 = -18.06178542
+
+CONVENTION SUMMARY:
+  Our numpy:  H = -J*ZZ - h*X  (ferro for J>0)
+  NetKet:     nk.operator.Ising(h=h, J=-1.0)  to match
+  Heisenberg: nk.operator.Heisenberg(J=1.0)   matches directly
