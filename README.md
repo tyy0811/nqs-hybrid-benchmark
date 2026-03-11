@@ -92,7 +92,7 @@ Extended here with neural quantum state methods targeting hybrid quantum-classic
 - [Lange, Bohrdt et al. (2025)](https://arxiv.org/abs/2406.00091) — Transformer NQS + quantum simulator data (*Quantum* **9**, 1675)
 - [Van de Walle, Schmitt, Bohrdt (2024)](https://arxiv.org/abs/2412.11830) — Time-dependent neural quantum states
 
-The theoretical framework (`NQS_Theoretical_Framework.md`) additionally covers the **Bose–Hubbard model** — the target system for FOR 5919 Project 01 — including Fock-space conventions, the hybrid experiment–NQS loop, and how time evolution enables approximate many-body state tomography.
+The theoretical framework (`NQS_Theoretical_Framework.md`) additionally covers the **Bose–Hubbard model** — the target system — including Fock-space conventions, the hybrid experiment–NQS loop, and how time evolution enables approximate many-body state tomography.
 
 ## Sign Convention (verified empirically)
 
